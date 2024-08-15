@@ -1,0 +1,45 @@
+/* Navbar container */
+nav {
+  position: relative;
+}
+
+/* Large device link styles */
+/* .underbar {
+  position: absolute;
+  bottom: 0;
+  width: 25%;
+  height: 0.3rem;
+  background: #1abc9c;
+} */
+
+/* Smooth reveal for mobile links */
+.routelink-sm {
+  opacity: 0;
+  transform: translateY(25%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.menu-opened .routelink-sm {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-opened {
+  opacity: 1;
+  z-index: 25;
+  visibility: visible;
+}
+
+.menu-closed {
+  opacity: 0;
+  z-index: -25;
+  visibility: hidden;
+}
+
+/* Transition for smooth opening and closing */
+.menu-opened {
+  transition: all 0.7s ease-in-out;
+}
+.menu-closed {
+  transition: all 0.25s ease-in-out;
+}

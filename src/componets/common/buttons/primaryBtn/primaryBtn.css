@@ -1,0 +1,17 @@
+.primaryBtn {
+  cursor: pointer;
+  border: none;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.primaryBtn:hover {
+  color: white;
+  transform: translateY(-1px);
+}
+
+.primaryBtn:active {
+  color: white;
+  transform: translateY(2px);
+}
