@@ -4,7 +4,7 @@ import WelcomeCard from "../../../sections/statistics/welcomeCard/welcomeCard";
 
 const Statistics = () => {
   return (
-    <div className="mx-3 lg:mx-5">
+    <div className="">
       <WelcomeCard />
       <div className="flex flex-wrap gap-3">
         <StatCard

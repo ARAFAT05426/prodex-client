@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { IoClose } from "react-icons/io5";
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, children, className = "" }) => {
   if (!isOpen) return null;
 
   return (
@@ -11,7 +11,9 @@ const Modal = ({ isOpen, onClose, children }) => {
           className="fixed inset-0 bg-black/25 backdrop-blur-xl"
           onClick={onClose}
         />
-        <div className="bg-white rounded-md shadow-lg overflow-y-auto overflow-x-hidden w-full max-w-md mx-4 relative custom-scrollbar">
+        <div
+          className={`bg-white rounded-md shadow-lg overflow-y-auto overflow-x-hidden w-full ${className} mx-4 relative custom-scrollbar`}
+        >
           <button
             className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
             onClick={onClose}
@@ -29,6 +31,7 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 export default Modal;

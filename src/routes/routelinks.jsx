@@ -1,4 +1,5 @@
-import { FaUsers, FaUserShield } from "react-icons/fa6";
+import { AiOutlineProduct } from "react-icons/ai";
+import { FaUserShield, FaUsersLine } from "react-icons/fa6";
 import { TfiBarChartAlt } from "react-icons/tfi";
 
 export const routelinks = [
@@ -23,9 +24,14 @@ export const dashboardLinks = [
     title: "Statistics",
   },
   {
-    icon: FaUsers,
+    icon: FaUsersLine,
     path: "/dashboard/users",
     title: "Users",
+  },
+  {
+    icon: AiOutlineProduct,
+    path: "/dashboard/products",
+    title: "Products",
   },
   {
     icon: FaUserShield,

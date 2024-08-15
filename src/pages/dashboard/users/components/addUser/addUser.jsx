@@ -10,7 +10,7 @@ const AddUser = ({ isOpen, onClose, refetch }) => {
   const [role, setRole] = useState(null);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleAddUser = async (e) => {
     e.preventDefault();
     const target = e.target;
     const name = target.name.value;
@@ -32,7 +32,7 @@ const AddUser = ({ isOpen, onClose, refetch }) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={handleSubmit} className="p-4 space-y-3">
+      <form onSubmit={handleAddUser} className="p-4 space-y-3">
         <h2 className="text-xl font-montserrat font-semibold ml-2">
           Add New User
         </h2>
@@ -54,7 +54,7 @@ const AddUser = ({ isOpen, onClose, refetch }) => {
           </button>
           <PrimaryBtn
             type="submit"
-            className="text-xs bg-blue-300 hover:bg-blue-500 active:bg-blue-500"
+            className=""
           >
             Add User
           </PrimaryBtn>

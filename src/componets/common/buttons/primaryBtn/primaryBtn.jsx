@@ -1,25 +1,21 @@
 import PropTypes from "prop-types";
-import "./primaryBtn.css";
-const PrimaryBtn = ({
-  children,
-  onClick,
-  type = "button",
-  className = "w-fit bg-slate-50 hover:bg-blue-400 active:bg-blue-400",
-}) => {
+
+const PrimaryBtn = ({ children, onClick, type = "button" }) => {
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`${className} primaryBtn font-montserrat font-semibold px-7 py-4 hover:scale-x-110 rounded-sm overflow-hidden`}
+      className={`bg-blue-600 hover:bg-black active:bg-black hover:text-white font-semibold px-8 py-3 transition-all duration-500 ease-in-out font-montserrat rounded`}
     >
       {children}
     </button>
   );
 };
+
 PrimaryBtn.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   type: PropTypes.string,
-  className: PropTypes.string,
 };
+
 export default PrimaryBtn;

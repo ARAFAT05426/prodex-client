@@ -15,7 +15,7 @@ const RoleUpdateModal = ({ isOpen, onClose, user, refetch }) => {
         role: selectedRole,
       });
       refetch();
-      onClose()
+      onClose();
       console.log(response.data);
     } catch (error) {
       console.error("Error updating user role:", error.message);

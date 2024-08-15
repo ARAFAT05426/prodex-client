@@ -11,10 +11,10 @@ const Navbar = () => {
   const toggleMenu = () => setActive((prev) => !prev);
 
   return (
-    <nav className="fixed top-0 inset-x-0 py-4 bg-white/50 backdrop-blur-xl z-50 shadow-md font-montserrat">
+    <nav className="fixed top-0 inset-x-0 h-16 py-4 bg-white/50 backdrop-blur-xl z-50 shadow-md font-montserrat">
       {/* Large device links */}
       <div className="relative hidden md:flex items-center justify-between container mx-auto">
-        <div className="text-3xl font-extrabold">LoGo</div>
+        <Link to={"/"} className="text-3xl font-extrabold"><img className="h-9" src="/logo.png" alt="" /></Link>
         <div className="relative flex items-center gap-3 font-semibold">
           {routelinks?.map((routelink, i) => (
             <NavLink
@@ -37,7 +37,7 @@ const Navbar = () => {
       </div>
       {/* Small device toggleBar */}
       <div className="flex md:hidden items-center justify-between px-5">
-        <h1 className="text-3xl text-blue-500 font-bold">LoGo</h1>
+        <Link to={'/'} className=""><img className="h-9" src="/logo.png" alt="" /></Link>
         <ToggleBar onClick={toggleMenu} isActive={isAct} />
       </div>
       {/* Small device links */}
@@ -46,7 +46,6 @@ const Navbar = () => {
           isAct === true ? "menu-opened" : "menu-closed"
         } bg-blue-100 flex flex-col  gap-5 font-semibold p-24 transition-all duration-700 ease-in-out`}
       >
-        <h1 className="text-3xl text-blue-500 font-bold">LoGo</h1>
         {routelinks.map((routelink, i) => (
           <NavLink
             key={i}

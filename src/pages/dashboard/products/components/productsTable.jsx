@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import { FaSpinner } from "react-icons/fa";
 import Table from "../../../../componets/table/table";
 
-const UsersTable = ({
+const ProductsTable = ({
   headers,
   loading,
   totalPages,
   currentPage,
   onPageChange,
-  modifiedusers,
+  modifiedProducts,
 }) => {
   return (
     <div className="px-3 md:px-5 mt-5 custom-scrollbar">
@@ -19,7 +19,7 @@ const UsersTable = ({
           loading={loading}
           rowsPerPage={10}
           headers={headers}
-          columns={modifiedusers}
+          columns={modifiedProducts}
           totalPages={totalPages}
           currentPage={currentPage}
           onPageChange={onPageChange}
@@ -29,18 +29,13 @@ const UsersTable = ({
   );
 };
 
-UsersTable.propTypes = {
-  headers: PropTypes.arrayOf(
-    PropTypes.shape({
-      header: PropTypes.string.isRequired,
-      accessor: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  modifiedusers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  loading: PropTypes.bool.isRequired,
-  totalPages: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
+ProductsTable.propTypes = {
+  headers: PropTypes.array,
+  loading: PropTypes.bool,
+  totalPages: PropTypes.number,
+  currentPage: PropTypes.number,
+  onPageChange: PropTypes.func,
+  modifiedProducts: PropTypes.array,
 };
 
-export default UsersTable;
+export default ProductsTable;

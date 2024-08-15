@@ -16,9 +16,7 @@ const Sidebar = () => {
           <ToggleBar isActive={isAct} onClick={() => setAct(!isAct)} />
         </div>
         <Link to="/">
-          <h1 className="text-2xl font-oswald font-bold">
-            LoGo
-          </h1>
+          <img className="h-9" src="/logo.png" alt="" />
         </Link>
       </nav>
       <aside
@@ -36,7 +34,9 @@ const Sidebar = () => {
                 onClick={() => setAct(false)}
                 className={({ isActive }) =>
                   `border-r-[0.33rem] ${
-                    isActive ? "border-r-blue-600 text-blue-600 font-semibold" : "border-r-transparent hover:bg-blue-300/25 hover:text-blue-500 hover:tracking-widest"
+                    isActive
+                      ? "border-r-blue-600 text-blue-600 font-semibold"
+                      : "border-r-transparent hover:bg-blue-300/25 hover:text-blue-500 hover:tracking-widest"
                   } font-montserrat font-semibold flex items-center gap-3 px-10 py-3 transition-all duration-300`
                 }
                 end

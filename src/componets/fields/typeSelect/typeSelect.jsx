@@ -2,7 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { FaChevronDown } from "react-icons/fa";
 
-const TypeSelect = ({ options = [], onSelect, placeholder = "Select" }) => {
+const TypeSelect = ({
+  options = [],
+  onSelect,
+  value,
+  placeholder = "Select",
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const dropdownRef = useRef(null);
@@ -10,10 +15,14 @@ const TypeSelect = ({ options = [], onSelect, placeholder = "Select" }) => {
   const handleToggle = () => setIsOpen(!isOpen);
 
   const handleSelect = (option) => {
-    setSelectedOption(option);
-    onSelect(option);
     setIsOpen(false);
+    onSelect(option);
+    setSelectedOption(option);
   };
+
+  useEffect(() => {
+    setSelectedOption(value || null);
+  }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -29,8 +38,8 @@ const TypeSelect = ({ options = [], onSelect, placeholder = "Select" }) => {
   return (
     <div className="relative font-montserrat font-medium" ref={dropdownRef}>
       <div
-        className={`flex items-center gap-[.60rem] justify-between px-4 py-2 border ${
-          isOpen ? "border-blue-300" : "border-e-gray-100"
+        className={`flex items-center gap-[.60rem] justify-between px-4 py-3 border ${
+          isOpen ? "border-blue-300" : "border-gray-200"
         } rounded-sm cursor-pointer transition-all duration-300`}
         onClick={handleToggle}
       >
@@ -39,7 +48,7 @@ const TypeSelect = ({ options = [], onSelect, placeholder = "Select" }) => {
             isOpen ? "text-blue-400" : "text-gray-600"
           } transition-all duration-300 font-semibold text-sm`}
         >
-          {selectedOption ? selectedOption : placeholder}
+          {selectedOption || placeholder}
         </span>
         <FaChevronDown
           className={`mt-px text-sm transition-all duration-300 ${
@@ -49,7 +58,7 @@ const TypeSelect = ({ options = [], onSelect, placeholder = "Select" }) => {
       </div>
       {isOpen && (
         <div
-          className={`absolute inset-x-0 bg-slate-50 right-0 z-10 border border-gray-300 rounded-sm mt-1 shadow`}
+          className={`absolute inset-x-0 bg-slate-50 right-0 z-[15] border border-gray-300 rounded-sm mt-1 shadow`}
         >
           {options.map((option, i) => (
             <div
@@ -69,6 +78,7 @@ const TypeSelect = ({ options = [], onSelect, placeholder = "Select" }) => {
 TypeSelect.propTypes = {
   options: PropTypes.array.isRequired,
   onSelect: PropTypes.func.isRequired,
+  value: PropTypes.string, // Added to handle value prop
   placeholder: PropTypes.string,
 };
 

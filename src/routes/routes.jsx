@@ -11,6 +11,7 @@ import Users from "../pages/dashboard/users/users";
 import Profile from "../pages/dashboard/profile/profile";
 import PrivateRoute from "./privateRoute";
 import ErrorPage from "../pages/errorPage/errorPage";
+import Products from "../pages/dashboard/products/products";
 
 export const routes = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const routes = createBrowserRouter([
       {
         index: true,
         element: <Statistics />,
+      },
+      {
+        path: "products",
+        element: <Products />,
       },
       {
         path: "users",

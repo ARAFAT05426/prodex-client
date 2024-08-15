@@ -1,22 +1,21 @@
-import UsersTable from "./components/usersTable";
-import { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
-import useRefetch from "../../../hooks/server/useRefetch";
-import UserSearchBar from "./components/userSearchBar";
-import TypeSelect from "../../../componets/fields/typeSelect/typeSelect";
+import { useState, useEffect } from "react";
+import UsersTable from "./components/usersTable";
 import AddUser from "./components/addUser/addUser";
+import useRefetch from "../../../hooks/server/useRefetch";
+import TypeSelect from "../../../componets/fields/typeSelect/typeSelect";
 import RoleUpdateModal from "./components/roleUpdate/roleUpdateModal";
+import TypeSearch from "../../../componets/fields/typeSearch/typeSearch";
 
 const Users = () => {
+  const [page, setPage] = useState(1);
   const [user, setUser] = useState(null);
+  const [filterBy, setFilterBy] = useState("");
+  const [isAddOpen, setAddOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditOpen, setEditOpen] = useState(false);
-  const [isAddOpen, setAddOpen] = useState(false);
-  const [filterBy, setFilterBy] = useState(""); // Corrected the case
-  const [page, setPage] = useState(1);
-  const [limit] = useState(10); // Adjust this to your desired rows per page
   const { data, loading, refetch } = useRefetch(
-    `/users?name=${searchTerm}&role=${filterBy}&page=${page}&limit=${limit}`
+    `/users?name=${searchTerm}&role=${filterBy}&page=${page}&limit=${10}`
   );
 
   useEffect(() => {
@@ -25,9 +24,9 @@ const Users = () => {
 
   const handleRefetch = async () => {
     setSearchTerm("");
-    setFilterBy(""); // Corrected the case
+    setFilterBy("");
     setPage(1);
-    await refetch();
+    refetch();
   };
 
   const headers = [
@@ -42,7 +41,7 @@ const Users = () => {
     setEditOpen(true);
   };
 
-  const filteredUsers = data
+  const modifiedusers = data
     ? data.users.map((user) => ({
         ...user,
         role: (
@@ -63,21 +62,23 @@ const Users = () => {
 
   return (
     <>
-      <div className="py-5 shadow-md bg-white rounded-sm border border-opacity-25">
+      <div className="relative py-5 shadow-md bg-white rounded-sm border border-opacity-25">
+        <div className="absolute top-3 h-10 w-[2px] bg-blue-600" />
         <h1 className="px-3 md:px-5 text-xl font-montserrat font-semibold">
           User Management Table
         </h1>
         <hr className="my-3 w-full" />
         <div className="flex flex-wrap items-start md:items-center justify-normal md:justify-between px-3 md:px-5 gap-2">
           <div className="flex flex-col sm:flex-row items-start gap-2">
-            <UserSearchBar
+            <TypeSearch
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
               handleRefetch={handleRefetch}
             />
             <TypeSelect
+              value={filterBy}
+              onSelect={setFilterBy}
               options={["admin", "user"]}
-              onSelect={setFilterBy} // Corrected the case
               placeholder="Filter by role"
               className="w-full sm:w-auto"
             />
@@ -92,7 +93,7 @@ const Users = () => {
         </div>
         <UsersTable
           headers={headers}
-          filteredUsers={filteredUsers}
+          modifiedusers={modifiedusers}
           loading={loading}
           totalPages={data?.totalPages || 1}
           currentPage={page}
