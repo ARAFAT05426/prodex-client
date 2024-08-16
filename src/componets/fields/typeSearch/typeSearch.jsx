@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { BiSearchAlt } from "react-icons/bi";
 import { LuRefreshCcw } from "react-icons/lu";
+import { useState } from "react";
 
 const TypeSearch = ({
   searchTerm,
@@ -8,17 +9,28 @@ const TypeSearch = ({
   handleRefetch,
   placeholder = "Search...",
 }) => {
+  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
+
+  const handleSearch = () => {
+    setSearchTerm(localSearchTerm);
+  };
+
   return (
     <div className="flex flex-wrap gap-4">
       <div className="flex items-center px-3 py-3 border rounded overflow-hidden focus-within:border-blue-300 transition-all duration-300">
-        <BiSearchAlt className="text-gray-500 mr-2 text-lg sm:text-xl" />
         <input
           className="outline-none px-2 w-full sm:w-auto focus:ring-0 text-sm"
           type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e?.target?.value)}
+          value={localSearchTerm}
+          onChange={(e) => setLocalSearchTerm(e.target.value)}
           placeholder={placeholder}
         />
+        <button
+          onClick={handleSearch}
+          className="text-gray-500 ml-2 text-lg sm:text-xl"
+        >
+          <BiSearchAlt />
+        </button>
       </div>
       {handleRefetch && (
         <button
@@ -37,7 +49,6 @@ TypeSearch.propTypes = {
   setSearchTerm: PropTypes.func.isRequired,
   handleRefetch: PropTypes.func,
   placeholder: PropTypes.string,
-  icon: PropTypes.node,
 };
 
 export default TypeSearch;

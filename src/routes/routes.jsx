@@ -1,17 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
-import Contact from "../pages/contact/contact";
-import Signup from "../pages/signup/signup";
-import About from "../pages/about/about";
-import Login from "../pages/login/login";
 import Home from "../pages/home/home";
 import Root from "../layouts/root/root";
+import Login from "../pages/login/login";
+import PrivateRoute from "./privateRoute";
+import Signup from "../pages/signup/signup";
+import Users from "../pages/dashboard/users/users";
+import ErrorPage from "../pages/errorPage/errorPage";
+import { createBrowserRouter } from "react-router-dom";
+import Profile from "../pages/dashboard/profile/profile";
 import DashboardPanel from "../layouts/dashboard/dashboardPanel";
 import Statistics from "../pages/dashboard/statistics/statistics";
-import Users from "../pages/dashboard/users/users";
-import Profile from "../pages/dashboard/profile/profile";
-import PrivateRoute from "./privateRoute";
-import ErrorPage from "../pages/errorPage/errorPage";
-import Products from "../pages/dashboard/products/products";
+import ManageProducts from "../pages/dashboard/products/manageProducts";
+import Products from "../pages/products/products";
 
 export const routes = createBrowserRouter([
   {
@@ -24,12 +23,8 @@ export const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
+        path: "/products",
+        element: <Products />,
       },
     ],
   },
@@ -48,7 +43,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "products",
-        element: <Products />,
+        element: <ManageProducts />,
       },
       {
         path: "users",

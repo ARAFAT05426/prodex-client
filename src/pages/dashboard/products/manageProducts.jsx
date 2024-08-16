@@ -15,7 +15,7 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString("en-GB", options);
 };
 
-const Products = () => {
+const ManageProducts = () => {
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState("");
   const [isAddOpen, setAddOpen] = useState(false);
@@ -184,4 +184,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ManageProducts;

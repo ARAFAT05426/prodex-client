@@ -18,7 +18,7 @@ const ParalaxHeader = ({ title }) => {
         {title}
       </h1>
       <div className="flex items-center gap-1 font-semibold z-10">
-        Template <IoIosArrowForward className="mt-[2px]" />
+        ProdEx <IoIosArrowForward className="mt-[2px]" />
         {title}
       </div>
     </div>

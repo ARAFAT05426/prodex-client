@@ -8,12 +8,8 @@ export const routelinks = [
     title: "Home",
   },
   {
-    path: "/about",
-    title: "About",
-  },
-  {
-    path: "/contact",
-    title: "Contact",
+    path: "/products",
+    title: "Products",
   },
 ];
 
