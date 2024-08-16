@@ -6,6 +6,7 @@ import useRefetch from "../../../hooks/server/useRefetch";
 import TypeSelect from "../../../componets/fields/typeSelect/typeSelect";
 import RoleUpdateModal from "./components/roleUpdate/roleUpdateModal";
 import TypeSearch from "../../../componets/fields/typeSearch/typeSearch";
+import { FaUserEdit } from "react-icons/fa";
 
 const Users = () => {
   const [page, setPage] = useState(1);
@@ -32,6 +33,7 @@ const Users = () => {
   const headers = [
     { header: "Name", accessor: "name" },
     { header: "Email", accessor: "email" },
+    { header: "Joined", accessor: "joined" },
     { header: "Role", accessor: "role" },
     { header: "Actions", accessor: "actions" },
   ];
@@ -41,20 +43,37 @@ const Users = () => {
     setEditOpen(true);
   };
 
+  const roleColors = {
+    admin: "bg-green-100 text-green-700",
+    user: "bg-blue-100 text-blue-700",
+  };
   const modifiedusers = data
     ? data.users.map((user) => ({
         ...user,
+        joined: (
+          <span className="font-montserrat text-sm">
+            {new Date(user?.createdAt).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })}
+          </span>
+        ),
         role: (
-          <span className="px-3 py-1 bg-red-50 font-semibold text-sm">
+          <span
+            className={`px-2 py-1 font-semibold text-sm ${
+              roleColors[user?.role] || "bg-gray-100 text-gray-700"
+            }`}
+          >
             {user?.role}
           </span>
         ),
         actions: (
           <button
             onClick={() => handleEditClick(user)}
-            className="font-montserrat font-semibold text-xs px-3 py-1 rounded bg-yellow-300 hover:bg-yellow-400 transition-all duration-300"
+            className="bg-blue-200 font-montserrat font-semibold text-xs p-1 rounded transition-all duration-300"
           >
-            Edit
+            <FaUserEdit />
           </button>
         ),
       }))

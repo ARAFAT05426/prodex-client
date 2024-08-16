@@ -35,7 +35,7 @@ TypeText.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.any,
   onChange: PropTypes.func,
 };
 

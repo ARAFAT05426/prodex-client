@@ -75,21 +75,20 @@ const Table = ({
       ) : (
         <>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 border-collapse table">
-              <thead className="">
+            <table className="font-montserrat min-w-full divide-y divide-gray-200 border-collapse table">
+              <thead className="border">
                 <tr className="font-montserrat font-semibold bg-gray-100">
                   {headers.map(({ header }) => (
                     <th
                       key={header}
-                      scope="col"
-                      className="px-2 py-2 md:px-4 md:py-4 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider"
+                      className="border px-2 py-2 md:px-4 md:py-4 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider"
                     >
                       {header}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="">
+              <tbody className="border">
                 {columns.length > 0 ? (
                   columns.map((row, index) => (
                     <tr
@@ -98,10 +97,10 @@ const Table = ({
                         index % 2 === 0 ? "bg-white" : "bg-gray-50"
                       } hover:bg-blue-50/75`}
                     >
-                      {headers.map(({ accessor }) => (
+                      {headers?.map(({ accessor }) => (
                         <td
                           key={accessor}
-                          className="px-2 py-2 md:px-4 md:py-3 text-nowrap text-sm text-gray-900"
+                          className="border px-2 py-2 md:px-4 md:py-3 text-nowrap text-sm text-gray-900"
                         >
                           {row[accessor] || "-"}
                         </td>
@@ -138,7 +137,9 @@ const Table = ({
               onClick={() => onPageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className={`px-2 py-1 md:px-3 md:py-2 text-gray-600 bg-blue-50/75 hover:bg-blue-100 hover:text-blue-600 ${
-                currentPage === totalPages ? "cursor-not-allowed opacity-50" : ""
+                currentPage === totalPages
+                  ? "cursor-not-allowed opacity-50"
+                  : ""
               }`}
             >
               <MdOutlineKeyboardArrowRight className="h-4 w-4 md:h-5 md:w-5" />

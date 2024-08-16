@@ -44,7 +44,7 @@ const AddProductModal = ({ isOpen, onClose, refetch }) => {
 
     try {
       const uploadedImageUrl = await uploadImage(image);
-       const newProduct = {
+      const newProduct = {
         name,
         image: uploadedImageUrl,
         price,
@@ -56,11 +56,11 @@ const AddProductModal = ({ isOpen, onClose, refetch }) => {
       };
       const responce = await axiosCommon.post("/products/add", newProduct);
       console.log(responce);
-      if(!responce){
-        return setError("Error adding product")
+      if (!responce) {
+        return setError("Error adding product");
       }
       onClose();
-      await refetch()
+      await refetch();
     } catch (err) {
       setUploadError(err.message || "Failed to upload image.");
     }
