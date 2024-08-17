@@ -1,16 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import useAuth from "../../hooks/providers/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import PrimaryBtn from "../../componets/common/buttons/primaryBtn/primaryBtn";
-import { useDevelopmentNotice } from "../../hooks/providers/useDevelopmentNotice";
 
 const Login = () => {
-  const { user, login } = useAuth();
+  const { user, login, logInWithGoogle } = useAuth();
   const navigate = useNavigate();
-  const { showNotice } = useDevelopmentNotice();
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -24,17 +23,33 @@ const Login = () => {
     const { email, password } = e.target.elements;
 
     if (!email.value || !password.value) {
-      console.error("All fields are required");
+      toast.error("All fields are required");
       return;
     }
 
     try {
       await login(email.value, password.value);
+      toast.success("User logged in successfully");
       navigate("/dashboard");
       e.target.reset();
-      console.log("User logged in successfully");
     } catch (error) {
-      console.error("An error occurred during login:", error.message);
+      if (error?.message === "Firebase: Error (auth/invalid-credential).") {
+        toast.error("Invalid email or password");
+      } else {
+        console.log(error?.message);
+        toast.error("An error occurred during login. Please try again.");
+      }
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await logInWithGoogle();
+      toast.success("Logged in with Google successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error?.message);
+      toast.error("Failed to sign in with Google. Please try again.");
     }
   };
 
@@ -92,7 +107,7 @@ const Login = () => {
             <hr className="w-full" />
           </div>
           <button
-            onClick={showNotice}
+            onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center font-semibold bg-white text-gray-800 border py-2 px-4 rounded shadow-sm"
           >
             <FcGoogle className="text-3xl mr-3" />

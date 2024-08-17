@@ -21,7 +21,7 @@ const ErrorPage = () => {
           The page you're looking for does not exist.
         </p>
       </div>
-      <div className="flex space-x-4">
+      <div className="flex ite space-x-3">
         <PrimaryBtn
           onClick={() => navigate(-1)}
           className="bg-blue-400 text-blue-800 hover:bg-blue-500 flex items-center transform transition-transform duration-300"
@@ -30,8 +30,8 @@ const ErrorPage = () => {
         </PrimaryBtn>
         <button
           onClick={() => navigate("/")}
-          className="flex items-center font-montserrat border-2 border-blue-400 bg-transparent hover:border-blue-500 text-blue-400 
-          hover:text-white hover:scale-x-110 font-semibold py-3 px-7 rounded-sm hover:bg-blue-500 transition-all duration-300"
+          className="w-full flex items-center font-montserrat border-2 border-blue-400 bg-transparent hover:border-blue-500 text-blue-400 
+          hover:text-white text-nowrap hover:scale-x-105 font-semibold py-3 px-7 rounded-sm hover:bg-blue-500 transition-all duration-300"
         >
           <IoHome className="mr-2" /> Home Page
         </button>

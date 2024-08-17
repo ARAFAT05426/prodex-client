@@ -1,38 +1,43 @@
-import { FaChartBar, FaUsers, FaDollarSign, FaTasks } from "react-icons/fa";
+import { FaDollarSign, FaRegHeart, FaTasks } from "react-icons/fa";
 import StatCard from "../../../componets/cards/StatCard/StatCard";
 import WelcomeCard from "../../../sections/statistics/welcomeCard/welcomeCard";
+import useRefetch from "../../../hooks/server/useRefetch";
+import useAuth from "../../../hooks/providers/useAuth";
+import { TbCheckupList } from "react-icons/tb";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import ManageProducts from "./products/manageProducts";
 
 const Statistics = () => {
+  const { user } = useAuth();
+  const { data, loading, refetch } = useRefetch(
+    `/products/?author=${user?.email}`
+  );
+  console.log(data);
   return (
-    <div className="">
+    <>
       <WelcomeCard />
       <div className="flex flex-wrap gap-3">
         <StatCard
-          icon={FaChartBar}
-          title="Monthly Increase"
-          value="85%"
-          description="Statistics"
+          icon={TbCheckupList}
+          title="Products"
+          value="85"
+          description="Products Added"
         />
         <StatCard
-          icon={FaUsers}
-          title="Total Users"
-          value="12,345"
-          description="Active Users"
+          icon={HiOutlineShoppingBag}
+          title="Orders"
+          value="12"
+          description="Placed Order"
         />
         <StatCard
-          icon={FaDollarSign}
-          title="Revenue"
-          value="$34,567"
-          description="Monthly Revenue"
-        />
-        <StatCard
-          icon={FaTasks}
-          title="Tasks Completed"
-          value="1,234"
-          description="Tasks"
+          icon={FaRegHeart}
+          title="Wishlist"
+          value="2"
+          description="Saved to wishlist"
         />
       </div>
-    </div>
+      <ManageProducts />
+    </>
   );
 };
 

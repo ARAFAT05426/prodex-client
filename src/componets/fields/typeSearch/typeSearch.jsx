@@ -27,7 +27,7 @@ const TypeSearch = ({
         />
         <button
           onClick={handleSearch}
-          className="text-gray-500 ml-2 text-lg sm:text-xl"
+          className="text-gray-500 ml-2 text-xl"
         >
           <BiSearchAlt />
         </button>

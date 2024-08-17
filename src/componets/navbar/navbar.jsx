@@ -14,7 +14,9 @@ const Navbar = () => {
     <nav className="fixed top-0 inset-x-0 h-16 py-4 bg-white/50 backdrop-blur-xl z-50 shadow-md font-montserrat">
       {/* Large device links */}
       <div className="relative hidden md:flex items-center justify-between container mx-auto">
-        <Link to={"/"} className="text-3xl font-extrabold"><img className="h-9" src="/logo.png" alt="" /></Link>
+        <Link to={"/"} className="text-3xl font-extrabold">
+          <img className="h-9" src="/logo.png" alt="" />
+        </Link>
         <div className="relative flex items-center gap-3 font-semibold">
           {routelinks?.map((routelink, i) => (
             <NavLink
@@ -22,7 +24,7 @@ const Navbar = () => {
               to={routelink?.path}
               className={({ isActive }) =>
                 `${
-                  isActive ? "text-blue-500 font-bold" : ""
+                  isActive ? "text-blue-500 font-black underline" : ""
                 } text- routelink-lg hover:text-primary transition-colors duration-300`
               }
             >
@@ -37,7 +39,9 @@ const Navbar = () => {
       </div>
       {/* Small device toggleBar */}
       <div className="flex md:hidden items-center justify-between px-5">
-        <Link to={'/'} className=""><img className="h-9" src="/logo.png" alt="" /></Link>
+        <Link to={"/"} className="">
+          <img className="h-9" src="/logo.png" alt="" />
+        </Link>
         <ToggleBar onClick={toggleMenu} isActive={isAct} />
       </div>
       {/* Small device links */}
@@ -52,7 +56,7 @@ const Navbar = () => {
             to={routelink?.path}
             className={({ isActive }) =>
               `${
-                isActive ? "text-blue-500 font-bold" : ""
+                isActive ? "text-blue-500 font-black underline" : ""
               } text-5xl hover:text-primary transition-colors duration-300 routelink-sm`
             }
             onClick={toggleMenu}

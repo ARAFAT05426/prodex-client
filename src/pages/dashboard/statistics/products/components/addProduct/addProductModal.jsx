@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import Modal from "../../../../../componets/modals/modal/modal";
-import axiosCommon from "../../../../../hooks/instance/axiosCommon";
-import useImageUpload from "../../../../../hooks/server/useImageUpload";
-import TypeText from "../../../../../componets/fields/typeText/typeText";
-import TypeFile from "../../../../../componets/fields/typeFile/typeFile";
-import TypeSelect from "../../../../../componets/fields/typeSelect/typeSelect";
-import TypeMultiInput from "../../../../../componets/fields/typeMultiInput/typeMultiInput";
-import TypeTextArea from "../../../../../componets/fields/typeTextArea/typeTextArea";
-import PrimaryBtn from "../../../../../componets/common/buttons/primaryBtn/primaryBtn";
+import useImageUpload from "../../../../../../hooks/server/useImageUpload";
+import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
+import Modal from "../../../../../../componets/modals/modal/modal";
+import TypeText from "../../../../../../componets/fields/typeText/typeText";
+import TypeFile from "../../../../../../componets/fields/typeFile/typeFile";
+import TypeSelect from "../../../../../../componets/fields/typeSelect/typeSelect";
+import TypeMultiInput from "../../../../../../componets/fields/typeMultiInput/typeMultiInput";
+import TypeTextArea from "../../../../../../componets/fields/typeTextArea/typeTextArea";
+import PrimaryBtn from "../../../../../../componets/common/buttons/primaryBtn/primaryBtn";
+import useAuth from "../../../../../../hooks/providers/useAuth";
 
 const AddProductModal = ({ isOpen, onClose, refetch }) => {
+  const {user} = useAuth()
   const [error, setError] = useState("");
   const [brand, setBrand] = useState("");
   const [image, setImage] = useState(null);
@@ -45,6 +47,7 @@ const AddProductModal = ({ isOpen, onClose, refetch }) => {
     try {
       const uploadedImageUrl = await uploadImage(image);
       const newProduct = {
+        author: user?.email,
         name,
         image: uploadedImageUrl,
         price,

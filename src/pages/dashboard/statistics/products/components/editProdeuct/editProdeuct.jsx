@@ -1,26 +1,25 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import Modal from "../../../../../componets/modals/modal/modal";
-import TypeMultiInput from "../../../../../componets/fields/typeMultiInput/typeMultiInput";
-import TypeSelect from "../../../../../componets/fields/typeSelect/typeSelect";
-import TypeText from "../../../../../componets/fields/typeText/typeText";
-import TypeFile from "../../../../../componets/fields/typeFile/typeFile";
-import TypeTextArea from "../../../../../componets/fields/typeTextArea/typeTextArea";
-import PrimaryBtn from "../../../../../componets/common/buttons/primaryBtn/primaryBtn";
-import useImageUpload from "../../../../../hooks/server/useImageUpload";
-import axiosCommon from "../../../../../hooks/instance/axiosCommon";
-
+import useImageUpload from "../../../../../../hooks/server/useImageUpload";
+import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
+import Modal from "../../../../../../componets/modals/modal/modal";
+import TypeText from "../../../../../../componets/fields/typeText/typeText";
+import TypeFile from "../../../../../../componets/fields/typeFile/typeFile";
+import TypeSelect from "../../../../../../componets/fields/typeSelect/typeSelect";
+import TypeMultiInput from "../../../../../../componets/fields/typeMultiInput/typeMultiInput";
+import TypeTextArea from "../../../../../../componets/fields/typeTextArea/typeTextArea";
+import PrimaryBtn from "../../../../../../componets/common/buttons/primaryBtn/primaryBtn";
 const EditProduct = ({ isOpen, onClose, product, refetch }) => {
   const [formData, setFormData] = useState({
-    _id: '',
-    name: '',
-    image: '',
-    price: '',
-    stock: '',
-    category: '',
-    brand: '',
+    _id: "",
+    name: "",
+    image: "",
+    price: "",
+    stock: "",
+    category: "",
+    brand: "",
     features: [],
-    description: '',
+    description: "",
   });
 
   const { uploadImage, loading: uploading } = useImageUpload();
@@ -28,15 +27,15 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
   useEffect(() => {
     if (product) {
       setFormData({
-        _id: product?._id || '',
-        name: product?.name || '',
-        image: product?.image || '',
-        price: product?.price || '',
-        stock: product?.stock || '',
-        category: product?.category || '',
-        brand: product?.brand || '',
+        _id: product?._id || "",
+        name: product?.name || "",
+        image: product?.image || "",
+        price: product?.price || "",
+        stock: product?.stock || "",
+        category: product?.category || "",
+        brand: product?.brand || "",
         features: product?.features || [],
-        description: product?.description || '',
+        description: product?.description || "",
       });
     }
   }, [product]);
@@ -58,7 +57,7 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
           image: uploadedImageUrl,
         }));
       } catch (error) {
-        console.error('Image upload failed:', error);
+        console.error("Image upload failed:", error);
       }
     }
   };
@@ -75,18 +74,24 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
 
     try {
       const response = await axiosCommon.put(`/products/update`, formData);
-      console.log('Product updated:', response.data);
-      refetch()
+      console.log("Product updated:", response.data);
+      refetch();
       onClose();
     } catch (error) {
-      console.error('Error updating product:', error);
+      console.error("Error updating product:", error);
     }
   };
 
   return (
     <Modal className="max-w-3xl" isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={handleSubmit} className="p-2 grid grid-cols-2 gap-3" noValidate>
-        <h2 className="text-xl font-montserrat font-semibold col-span-2">Edit Product</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="p-2 grid grid-cols-2 gap-3"
+        noValidate
+      >
+        <h2 className="text-xl font-montserrat font-semibold col-span-2">
+          Edit Product
+        </h2>
         <TypeText
           name="name"
           placeholder="Set a name"
@@ -109,7 +114,7 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
           onChange={handleChange}
         />
         <TypeSelect
-          options={['electric', 'normal']}
+          options={["electric", "normal"]}
           value={formData.category}
           onSelect={(value) =>
             setFormData((prevFormData) => ({
@@ -120,7 +125,7 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
           placeholder="Set category"
         />
         <TypeSelect
-          options={['Nike', 'Puma']}
+          options={["Nike", "Puma"]}
           value={formData.brand}
           onSelect={(value) =>
             setFormData((prevFormData) => ({ ...prevFormData, brand: value }))
@@ -152,7 +157,7 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
             Cancel
           </button>
           <PrimaryBtn type="submit" disabled={uploading}>
-            {uploading ? 'Uploading...' : 'Update'}
+            {uploading ? "Uploading..." : "Update"}
           </PrimaryBtn>
         </div>
       </form>

@@ -10,8 +10,8 @@ import {
   signInWithPopup,
   updateProfile,
   signOut,
+  GoogleAuthProvider
 } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
 
 const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
@@ -36,9 +36,17 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const logInWithGoogle = () => {
+  const logInWithGoogle = async () => {
     setLoading(true);
-    return signInWithPopup(auth, googleProvider);
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      return result;
+    } catch (error) {
+      console.error("Google login error:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logOut = async () => {
@@ -53,24 +61,30 @@ const AuthProvider = ({ children }) => {
 
   const updateUserProfile = async (updates) => {
     if (auth.currentUser) {
-      updateProfile(auth?.currentUser, {
-        ...updates,
-      });
+      try {
+        await updateProfile(auth.currentUser, updates);
+      } catch (error) {
+        console.error("Error updating profile:", error);
+      }
     }
   };
 
   const addUser = async (user) => {
-    const currentUser = {
-      name: user.displayName,
-      email: user.email,
-    };
-    const { data } = await axiosCommon.put("/users/add", currentUser);
-    return data;
+    if (user) {
+      const currentUser = {
+        name: user.displayName || "No Name",
+        email: user.email || "No Email",
+      };
+      const { data } = await axiosCommon.put("/users/add", currentUser);
+      return data;
+    }
   };
 
   const getToken = async (email) => {
-    const { data } = await axiosCommon.post("/auth/token", { email });
-    return data;
+    if (email) {
+      const { data } = await axiosCommon.post("/auth/token", { email });
+      return data;
+    }
   };
 
   useEffect(() => {

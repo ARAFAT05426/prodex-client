@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { FaSpinner } from "react-icons/fa";
-import Table from "../../../../componets/table/table";
+import Table from "../../../../../componets/table/table";
 
 const ProductsTable = ({
   headers,

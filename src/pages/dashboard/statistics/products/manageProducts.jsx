@@ -1,11 +1,12 @@
 import { MdAdd, MdOutlineDeleteForever } from "react-icons/md";
+import useAuth from "../../../../hooks/providers/useAuth";
 import { useEffect, useState } from "react";
-import useRefetch from "../../../hooks/server/useRefetch";
-import ProductsTable from "./components/productsTable";
-import TypeSearch from "../../../componets/fields/typeSearch/typeSearch";
-import TypeSelect from "../../../componets/fields/typeSelect/typeSelect";
-import AddProductModal from "./components/addProduct/addProductModal";
+import useRefetch from "../../../../hooks/server/useRefetch";
 import { TbBookmarkEdit } from "react-icons/tb";
+import TypeSearch from "../../../../componets/fields/typeSearch/typeSearch";
+import TypeSelect from "../../../../componets/fields/typeSelect/typeSelect";
+import ProductsTable from "./components/productsTable";
+import AddProductModal from "./components/addProduct/addProductModal";
 import EditProduct from "./components/editProdeuct/editProdeuct";
 import DeleteProduct from "./components/deleteProduct/deleteProduct";
 
@@ -16,6 +17,7 @@ const formatDate = (dateString) => {
 };
 
 const ManageProducts = () => {
+  const { user } = useAuth();
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState("");
   const [isAddOpen, setAddOpen] = useState(false);
@@ -23,12 +25,12 @@ const ManageProducts = () => {
   const [isDeleteOpen, setDeleteOpen] = useState(false);
   const [priceRange, setPriceRange] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortByDate, setSortByDate] = useState("");
-  const [sortByPrice, setSortByPrice] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const { data, loading, refetch } = useRefetch(
-    `/products?search=${searchTerm}&category=${category}&priceRange=${priceRange}&sortByDate=${sortByDate}&sortByPrice=${sortByPrice}&page=${page}&limit=${10}`
+    `/products/?author=${
+      user?.email
+    }&search=${searchTerm}&category=${category}&priceRange=${priceRange}&page=${page}&limit=${5}`
   );
 
   useEffect(() => {
@@ -37,8 +39,6 @@ const ManageProducts = () => {
     searchTerm,
     category,
     priceRange,
-    sortByDate,
-    sortByPrice,
     page,
     refetch,
   ]);
@@ -47,8 +47,6 @@ const ManageProducts = () => {
     setCategory("");
     setSearchTerm("");
     setPriceRange("");
-    setSortByDate("");
-    setSortByPrice("");
     setPage(1);
     refetch();
   };
@@ -108,7 +106,7 @@ const ManageProducts = () => {
 
   return (
     <>
-      <div className="relative py-5 shadow-md bg-white rounded-sm border border-opacity-25">
+      <div className="relative py-5 shadow-md bg-white rounded-sm border border-opacity-25 mt-3">
         <div className="absolute top-3 h-10 w-[2px] bg-blue-600" />
         <h1 className="px-3 md:px-5 text-xl font-montserrat font-semibold">
           Product Management Table
@@ -132,18 +130,6 @@ const ManageProducts = () => {
               onSelect={setPriceRange}
               value={priceRange}
               placeholder="Filter by price range"
-            />
-            <TypeSelect
-              options={["Low-High", "High-Low"]}
-              onSelect={setSortByPrice}
-              value={sortByPrice}
-              placeholder="Sort by Price"
-            />
-            <TypeSelect
-              options={["Newest", "Oldest"]}
-              onSelect={setSortByDate}
-              value={sortByDate}
-              placeholder="Sort by Date"
             />
           </div>
           <button

@@ -81,7 +81,7 @@ const Table = ({
                   {headers.map(({ header }) => (
                     <th
                       key={header}
-                      className="border px-2 py-2 md:px-4 md:py-4 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider"
+                      className="border px-2 py-2 md:px-4 md:py-4 text-left text-xs md:text-sm text-gray-500 uppercase tracking-wider"
                     >
                       {header}
                     </th>
@@ -120,7 +120,7 @@ const Table = ({
               </tbody>
             </table>
           </div>
-          <div className="flex flex-wrap items-center justify-end mt-4 text-xs md:text-sm">
+          <div className="border w-fit ml-auto divide-x flex items-center justify-end mt-4 text-xs md:text-sm">
             <button
               onClick={() => onPageChange(currentPage - 1)}
               disabled={currentPage === 1}
@@ -136,7 +136,7 @@ const Table = ({
             <button
               onClick={() => onPageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className={`px-2 py-1 md:px-3 md:py-2 text-gray-600 bg-blue-50/75 hover:bg-blue-100 hover:text-blue-600 ${
+              className={`px-4 py-1 md:px-5 md:py-2 text-gray-600 bg-blue-50/75 hover:bg-blue-100 hover:text-blue-600 ${
                 currentPage === totalPages
                   ? "cursor-not-allowed opacity-50"
                   : ""

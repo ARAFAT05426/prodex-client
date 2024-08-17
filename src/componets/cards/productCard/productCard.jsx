@@ -74,8 +74,8 @@ const ProductCard = ({ product }) => {
           ))}
         </div>
       </div>
-      <div className="mt-auto">
-        <PrimaryBtn>$ {price}</PrimaryBtn>
+      <div className="mt-auto w-full">
+        <PrimaryBtn className="w-full">$ {price}</PrimaryBtn>
       </div>
     </div>
   );

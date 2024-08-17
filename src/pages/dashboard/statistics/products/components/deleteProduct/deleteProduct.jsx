@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import Modal from "../../../../../componets/modals/modal/modal";
-import PrimaryBtn from "../../../../../componets/common/buttons/primaryBtn/primaryBtn";
-import axiosCommon from "../../../../../hooks/instance/axiosCommon";
+import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
+import Modal from "../../../../../../componets/modals/modal/modal";
+import PrimaryBtn from "../../../../../../componets/common/buttons/primaryBtn/primaryBtn";
 
 const DeleteProduct = ({ isOpen, onClose, id, refetch }) => {
   const handleConfirm = async () => {
