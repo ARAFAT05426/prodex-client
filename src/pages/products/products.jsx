@@ -98,7 +98,7 @@ const Products = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-96">
+      <div className="flex justify-center items-center h-[75vh]">
         <Loader />
       </div>
     );

@@ -1,32 +1,70 @@
-# Client Template
+# Fullstack Single Page Website Project
 
-## Overview
+## Task Overview
 
-**Client Template** is a modern React application setup utilizing Vite as the build tool. It provides a streamlined development environment with Hot Module Replacement (HMR) and pre-configured ESLint rules for code quality. This template is designed to help you quickly bootstrap a React project with the latest tools and best practices.
+This project is a fullstack single-page website that includes functionality for searching, filtering, pagination, and sorting products. Built with the MERN stack (MongoDB, Express.js, React.js, Node.js), this website offers a comprehensive solution for managing product data. The product details include: Product Name, Product Image, Description, Price, Category, Ratings, and Creation Date.
 
-## Features
+## https://prodex-solution.web.app/
 
-- **React**: A popular JavaScript library for building user interfaces.
-- **Vite**: A fast and lightweight build tool that offers an excellent development experience with HMR (Hot Module Replacement).
-- **ESLint**: Code linting to enforce consistent coding styles and catch common errors.
+### 1. Setup and Basic Structure
 
-## Plugins
+- **Project Initialization**: Successfully set up a MERN stack project using Mongoose.
+- **API Development**: Implemented APIs to fetch product data from the database.
+- **Database**: Inserted at least 40 dummy product entries into the database.
 
-This template includes the following Vite plugins for React:
+### 2. Pagination
 
-- **[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)**: Uses Babel for Fast Refresh, providing a seamless development experience with instant feedback on code changes.
-- **[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)**: Uses SWC for Fast Refresh, offering faster builds and updates by leveraging SWC's high-performance compiler.
+- **Backend**: Pagination implemented for efficient product loading.
+- **Frontend**: Page numbers and navigation buttons are functional.
+
+### 3. Searching
+
+- **Search Feature**: Users can search for products by name.
+
+### 4. Categorization
+
+- **Product Categories**: Products are categorized by:
+  - Brand Name
+  - Category Name
+  - Price Range
+- **Filtering**: Users can filter products by one or more criteria simultaneously.
+
+### 5. Sorting
+
+- **Sorting Options**: Sorting functionality includes:
+  - Price: Low to High, High to Low
+  - Date Added: Newest first
+
+### 6. Authentication
+
+- **Google Authentication**: Integrated Google Authentication using Firebase.
+- **Email and Password Authentication**: Implemented Firebase authentication with email and password.
+
+### 7. UI Instructions
+
+- **Responsiveness**: The website is fully responsive with a mobile-first design approach.
+- **Product Cards**: Fixed-size product cards are used to display product information.
+- **Navbar**: Navbar includes the website name/logo and relevant routes.
+- **Footer**: Footer implemented with necessary information and links.
+
+### 8. Additional Notes
+
+- **Code Quality**: Code is clean, well-commented, and follows best practices.
+- **Commits**: Made at least 10 meaningful commits in both frontend and backend repositories.
+- **Documentation**: README files in both frontend and backend repositories provide project setup, instructions, and necessary details for running the project locally.
 
 ## Getting Started
 
+To clone and run this project locally, follow these steps:
+
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [npm](https://www.npmjs.com/) (or [yarn](https://yarnpkg.com/))
+- Ensure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your machine.
+- Make sure you have [MongoDB](https://www.mongodb.com/) installed and running.
 
-### Installation
+### Cloning the Repository
 
-1. **Clone the Repository:**
+```bash
+   git clone [https://github.com/ARAFAT05426/prodex-client.git]
 
-   ```bash
-   git clone https://github.com/ARAFAT05426/client-template.git
+```
