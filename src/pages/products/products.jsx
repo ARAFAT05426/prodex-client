@@ -13,13 +13,14 @@ import Loader from "../../componets/loader/loader";
 const Products = () => {
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortByDate, setSortByDate] = useState("Newest");
   const [sortByPrice, setSortByPrice] = useState("");
+  const [sortByDate, setSortByDate] = useState("Newest");
 
   const { data, loading, error, refetch } = useRefetch(
-    `/products?search=${searchTerm}&category=${category}&priceRange=${priceRange}&sortByDate=${sortByDate}&sortByPrice=${sortByPrice}&page=${page}&limit=8`
+    `/products?search=${searchTerm}&category=${category}&brand=${brand}&priceRange=${priceRange}&sortByDate=${sortByDate}&sortByPrice=${sortByPrice}&page=${page}&limit=8`
   );
 
   useEffect(() => {
@@ -31,10 +32,9 @@ const Products = () => {
     sortByDate,
     sortByPrice,
     page,
-    refetch,
   ]);
 
-  const resetFilters = async () => {
+  const resetFilters = () => {
     setCategory("");
     setSearchTerm("");
     setPriceRange("");
@@ -105,6 +105,7 @@ const Products = () => {
   }
 
   if (error) {
+    console.error("Error fetching products:", error);
     return (
       <div className="text-red-500 text-center py-10">
         An error occurred while fetching products. Please try again later.
@@ -122,10 +123,38 @@ const Products = () => {
           handleRefetch={resetFilters}
         />
         <TypeSelect
-          options={["Electronics", "Accessories", "Apparel", "Home Goods"]}
+          options={[
+            "Smartphones",
+            "Laptops",
+            "Cameras",
+            "Audio",
+            "Gaming",
+            "Smart Home",
+            "Office",
+          ]}
           onSelect={setCategory}
           value={category}
           placeholder="Filter by category"
+        />
+        <TypeSelect
+          options={[
+            "Apple",
+            "Dell",
+            "LG",
+            "Sony",
+            "Bose",
+            "Samsung",
+            "Huawei",
+            "Panasonic",
+            "JBL",
+            "Lenovo",
+            "Microsoft",
+            "Nikon",
+            "Asus",
+          ]}
+          onSelect={setBrand}
+          value={brand}
+          placeholder="Filter by brand"
         />
         <TypeSelect
           options={["0-100", "101-500", "501-1000", "1001+"]}
@@ -166,9 +195,7 @@ const Products = () => {
         >
           <MdOutlineKeyboardArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
         </button>
-        <div className="flex items-center gap-1">
-          {getPaginationButtons()}
-        </div>
+        <div className="flex items-center gap-1">{getPaginationButtons()}</div>
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page === data?.totalPages}

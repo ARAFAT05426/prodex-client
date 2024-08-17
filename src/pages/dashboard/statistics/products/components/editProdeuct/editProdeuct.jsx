@@ -120,7 +120,15 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
           onChange={handleChange}
         />
         <TypeSelect
-          options={["electric", "normal"]}
+          options={[
+            "Smartphones",
+            "Laptops",
+            "Cameras",
+            "Audio",
+            "Gaming",
+            "Smart Home",
+            "Office",
+          ]}
           value={formData.category}
           onSelect={(value) =>
             setFormData((prevFormData) => ({
@@ -131,7 +139,21 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
           placeholder="Set category"
         />
         <TypeSelect
-          options={["Nike", "Puma"]}
+          options={[
+            "Apple",
+            "Dell",
+            "LG",
+            "Sony",
+            "Bose",
+            "Samsung",
+            "Huawei",
+            "Panasonic",
+            "JBL",
+            "Lenovo",
+            "Microsoft",
+            "Nikon",
+            "Asus",
+          ]}
           value={formData.brand}
           onSelect={(value) =>
             setFormData((prevFormData) => ({ ...prevFormData, brand: value }))

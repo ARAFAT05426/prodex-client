@@ -95,12 +95,34 @@ const AddProductModal = ({ isOpen, onClose, refetch }) => {
           <TypeText name="stock" placeholder="Set stock" type="number" />
 
           <TypeSelect
-            options={["electric", "normal"]}
+            options={[
+              "Smartphones",
+              "Laptops",
+              "Cameras",
+              "Audio",
+              "Gaming",
+              "Smart Home",
+              "Office",
+            ]}
             onSelect={setCategory}
             placeholder="Set category"
           />
           <TypeSelect
-            options={["Nike", "Puma"]}
+            options={[
+              "Apple",
+              "Dell",
+              "LG",
+              "Sony",
+              "Bose",
+              "Samsung",
+              "Huawei",
+              "Panasonic",
+              "JBL",
+              "Lenovo",
+              "Microsoft",
+              "Nikon",
+              "Asus",
+            ]}
             onSelect={setBrand}
             placeholder="Set brand"
           />

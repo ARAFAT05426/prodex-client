@@ -4,13 +4,17 @@ import useRefetch from "../../../hooks/server/useRefetch";
 import ProductCard from "../../../componets/cards/productCard/productCard";
 
 const TrendingContainer = () => {
-  const [category, setCategory] = useState("Electronics");
+  const [category, setCategory] = useState("Smartphones");
   const { data, loading, error, refetch } = useRefetch(
     `/products?category=${category}`
   );
 
-  // Dummy categories
-  const categories = ["Electronics", "Fashion", "Home", "Toys", "Books"];
+  const categories = [
+    "Smartphones",
+    "Laptops",
+    "Audio",
+    "Networking"
+  ];
 
   useEffect(() => {
     refetch();

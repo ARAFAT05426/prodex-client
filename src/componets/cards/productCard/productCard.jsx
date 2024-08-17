@@ -1,6 +1,5 @@
 import "./productCard.css";
 import PropTypes from "prop-types";
-import { SiDatabricks } from "react-icons/si";
 import { TiInputChecked } from "react-icons/ti";
 import { FaStarHalfStroke } from "react-icons/fa6";
 import { IoBookmarksOutline } from "react-icons/io5";
@@ -13,7 +12,6 @@ const ProductCard = ({ product }) => {
     image,
     price,
     brand,
-    stock,
     ratings,
     category,
     features,
@@ -27,7 +25,7 @@ const ProductCard = ({ product }) => {
         <img
           src={image}
           alt={name}
-          className="w-full h-52 rounded object-cover transition-all duration-300 group-hover:scale-105 group-hover:opacity-90"
+          className="w-full h-52 rounded object-cover transition-all duration-300 group-hover:scale-105"
         />
         <div className="glassy-overlay"></div>
       </div>
@@ -57,10 +55,6 @@ const ProductCard = ({ product }) => {
               month: "short",
               year: "numeric",
             })}
-          </span>
-          <span className="text-sm flex items-center gap-1 font-semibold text-gray-800">
-            <SiDatabricks className="" />
-            {stock}
           </span>
         </div>
         <div className="flex-1 flex flex-col gap-px px-1">

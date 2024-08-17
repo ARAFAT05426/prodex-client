@@ -2,18 +2,21 @@ import PropTypes from "prop-types";
 import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
 import Modal from "../../../../../../componets/modals/modal/modal";
 import PrimaryBtn from "../../../../../../componets/common/buttons/primaryBtn/primaryBtn";
+import { toast } from "react-toastify";
 
 const DeleteProduct = ({ isOpen, onClose, id, refetch }) => {
   const handleConfirm = async () => {
     try {
-      
       await axiosCommon.delete(`/products/delete/${id}`);
+      toast.success("Product deleted successfully!");
       onClose();
       refetch();
     } catch (error) {
+      toast.error("Error deleting product.");
       console.error("Error deleting product:", error);
     }
   };
+  
 
   return (
     <Modal className="max-w-md" isOpen={isOpen} onClose={onClose}>

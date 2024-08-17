@@ -114,7 +114,15 @@ const ManageProducts = () => {
               handleRefetch={handleRefetch}
             />
             <TypeSelect
-              options={["Electronics", "Accessories", "Apparel", "Home Goods"]}
+              options={[
+                "Smartphones",
+                "Laptops",
+                "Cameras",
+                "Audio",
+                "Gaming",
+                "Smart Home",
+                "Office",
+              ]}
               onSelect={setCategory}
               value={category}
               placeholder="Filter by category"

@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import { BiSearchAlt } from "react-icons/bi";
 import { LuRefreshCcw } from "react-icons/lu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TypeSearch = ({
-  searchTerm,
+  searchTerm = "",
   setSearchTerm,
   handleRefetch,
   placeholder = "Search...",
 }) => {
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
+
+  useEffect(() => {
+    setLocalSearchTerm(searchTerm);
+  }, [searchTerm]);
 
   const handleSearch = () => {
     setSearchTerm(localSearchTerm);
