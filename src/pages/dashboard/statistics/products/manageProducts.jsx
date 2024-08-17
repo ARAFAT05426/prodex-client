@@ -28,7 +28,7 @@ const ManageProducts = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const { data, loading, refetch } = useRefetch(
-    `/products/?author=${
+    `/products?author=${
       user?.email
     }&search=${searchTerm}&category=${category}&priceRange=${priceRange}&page=${page}&limit=${5}`
   );

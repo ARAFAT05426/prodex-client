@@ -25,10 +25,7 @@ const TypeSearch = ({
           onChange={(e) => setLocalSearchTerm(e.target.value)}
           placeholder={placeholder}
         />
-        <button
-          onClick={handleSearch}
-          className="text-gray-500 ml-2 text-xl"
-        >
+        <button onClick={handleSearch} className="text-gray-700 ml-2 text-xl">
           <BiSearchAlt />
         </button>
       </div>

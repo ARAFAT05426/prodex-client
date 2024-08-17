@@ -6,8 +6,9 @@ const Banner = () => {
     <header
       className="h-screen bg-cover bg-center relative"
       style={{ backgroundImage: `url('/banner.png')` }}
+      aria-label="Banner image"
     >
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true"></div>
       <div className="container mx-auto flex flex-col items-center justify-center h-full text-center relative z-10 px-4 md:px-6 lg:px-8">
         <div className="text-white flex flex-col items-center justify-center gap-4 md:gap-6">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-montserrat font-bold bg-white text-transparent bg-clip-text">
@@ -29,4 +30,3 @@ const Banner = () => {
 };
 
 export default Banner;
-

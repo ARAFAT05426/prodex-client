@@ -156,7 +156,7 @@ const Products = () => {
         )}
       </div>
 
-      <div className="w-fit mx-auto flex items-center justify-center gap-1 my-5 text-xs md:text-sm">
+      <div className="w-fit mx-auto border divide-x flex items-center justify-center my-5 text-xs md:text-sm">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page === 1}
