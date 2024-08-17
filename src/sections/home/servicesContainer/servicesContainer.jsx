@@ -24,7 +24,7 @@ const ServicesContainer = () => {
   ];
 
   return (
-    <div className="flex items-center justify-between max-w-7xl mx-auto min-h-40">
+    <div className="flex flex-wrap items-center justify-center lg:justify-between gap-3 md:gap-5 max-w-full lg:max-w-7xl mx-auto min-h-40 py-3">
       {services.map((service, i) => {
         const Icon = service?.icon;
         return (

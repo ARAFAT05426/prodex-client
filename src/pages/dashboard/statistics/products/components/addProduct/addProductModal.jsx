@@ -1,18 +1,19 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import useImageUpload from "../../../../../../hooks/server/useImageUpload";
-import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
+import { toast } from "react-toastify";
+import useAuth from "../../../../../../hooks/providers/useAuth";
 import Modal from "../../../../../../componets/modals/modal/modal";
+import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
+import useImageUpload from "../../../../../../hooks/server/useImageUpload";
 import TypeText from "../../../../../../componets/fields/typeText/typeText";
 import TypeFile from "../../../../../../componets/fields/typeFile/typeFile";
 import TypeSelect from "../../../../../../componets/fields/typeSelect/typeSelect";
-import TypeMultiInput from "../../../../../../componets/fields/typeMultiInput/typeMultiInput";
 import TypeTextArea from "../../../../../../componets/fields/typeTextArea/typeTextArea";
 import PrimaryBtn from "../../../../../../componets/common/buttons/primaryBtn/primaryBtn";
-import useAuth from "../../../../../../hooks/providers/useAuth";
+import TypeMultiInput from "../../../../../../componets/fields/typeMultiInput/typeMultiInput";
 
 const AddProductModal = ({ isOpen, onClose, refetch }) => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const [error, setError] = useState("");
   const [brand, setBrand] = useState("");
   const [image, setImage] = useState(null);
@@ -57,78 +58,82 @@ const AddProductModal = ({ isOpen, onClose, refetch }) => {
         features,
         description,
       };
-      const responce = await axiosCommon.post("/products/add", newProduct);
-      console.log(responce);
-      if (!responce) {
+      const response = await axiosCommon.post("/products/add", newProduct);
+      console.log(response);
+      if (!response) {
         return setError("Error adding product");
       }
+      toast.success("Product added successfully!");
       onClose();
       await refetch();
     } catch (err) {
       setUploadError(err.message || "Failed to upload image.");
+      toast.error("Failed to add product. Please try again.");
     }
   };
 
   return (
-    <Modal className="max-w-3xl" isOpen={isOpen} onClose={onClose}>
-      <form
-        onSubmit={handleAddProduct}
-        className="p-2 grid grid-cols-2 gap-3"
-        noValidate
-      >
-        <h2 className="text-xl font-montserrat font-semibold col-span-2">
-          Add New Product
-        </h2>
-        {(error || uploadError) && (
-          <p className="text-red-500 text-sm col-span-2">
-            {error || uploadError}
-          </p>
-        )}
+    <>
+      <Modal className="max-w-3xl" isOpen={isOpen} onClose={onClose}>
+        <form
+          onSubmit={handleAddProduct}
+          className="p-2 grid grid-cols-2 gap-3"
+          noValidate
+        >
+          <h2 className="text-xl font-montserrat font-semibold col-span-2">
+            Add New Product
+          </h2>
+          {(error || uploadError) && (
+            <p className="text-red-500 text-sm col-span-2">
+              {error || uploadError}
+            </p>
+          )}
 
-        <TypeText name="name" placeholder="Set a name" />
-        <TypeFile name="image" onChange={setImage} required />
-        <TypeText name="price" placeholder="Set a price" type="number" />
-        <TypeText name="stock" placeholder="Set stock" type="number" />
+          <TypeText name="name" placeholder="Set a name" />
+          <TypeFile name="image" onChange={setImage} required />
+          <TypeText name="price" placeholder="Set a price" type="number" />
+          <TypeText name="stock" placeholder="Set stock" type="number" />
 
-        <TypeSelect
-          options={["electric", "normal"]}
-          onSelect={setCategory}
-          placeholder="Set category"
-        />
-        <TypeSelect
-          options={["Nike", "Puma"]}
-          onSelect={setBrand}
-          placeholder="Set brand"
-        />
-        <div className="col-span-2">
-          <TypeMultiInput
-            name="Features"
-            placeholder="Add some feature"
-            values={features}
-            onChange={setFeatures}
+          <TypeSelect
+            options={["electric", "normal"]}
+            onSelect={setCategory}
+            placeholder="Set category"
           />
-        </div>
-        <div className="col-span-2">
-          <TypeTextArea
-            name="description"
-            placeholder="Set description for the product"
+          <TypeSelect
+            options={["Nike", "Puma"]}
+            onSelect={setBrand}
+            placeholder="Set brand"
           />
-        </div>
+          <div className="col-span-2">
+            <TypeMultiInput
+              name="Features"
+              placeholder="Add some feature"
+              values={features}
+              onChange={setFeatures}
+            />
+          </div>
+          <div className="col-span-2">
+            <TypeTextArea
+              name="description"
+              placeholder="Set description for the product"
+            />
+          </div>
 
-        <div className="col-span-2 mt-6 flex justify-end">
-          <button
-            type="button"
-            onClick={onClose}
-            className="mr-3 px-4 py-2 font-montserrat font-semibold bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-sm"
-          >
-            Cancel
-          </button>
-          <PrimaryBtn type="submit" disabled={uploading}>
-            {uploading ? "Uploading..." : "Add Product"}
-          </PrimaryBtn>
-        </div>
-      </form>
-    </Modal>
+          <div className="col-span-2 mt-6 flex justify-end">
+            <button
+              type="button"
+              onClick={onClose}
+              className="mr-3 px-4 py-2 font-montserrat font-semibold bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-sm"
+            >
+              Cancel
+            </button>
+            <PrimaryBtn type="submit" disabled={uploading}>
+              {uploading ? "Uploading..." : "Add Product"}
+            </PrimaryBtn>
+          </div>
+        </form>
+      </Modal>
+    </>
   );
 };
 

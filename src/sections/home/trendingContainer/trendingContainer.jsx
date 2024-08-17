@@ -31,32 +31,34 @@ const TrendingContainer = () => {
     );
 
   return (
-    <div className="container mx-auto my-3">
-      <h1 className="text-2xl font-montserrat font-semibold">
+    <div className="container mx-auto py-5 px-5 md:px-0">
+      <h1 className="text-3xl font-montserrat font-semibold text-center mb-4">
         Trending Products
       </h1>
-      <div className="flex flex-wrap items-center font-montserrat font-medium gap-5 mt-2">
+      <div className="flex flex-wrap justify-start gap-4 mb-5">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`px-3 py-1 border-b-2 rounded-sm transition-all duration-300 ${
+            className={`font-montserrat px-1 py-px border-b-2 rounded-sm transition-all duration-300 ${
               category === cat
                 ? "font-semibold text-blue-600 border-blue-600"
-                : "border-b-transparent hover:font-semibold hover:text-blue-600"
+                : "font-medium border-b-transparent hover:border-blue-600 hover:text-blue-600"
             }`}
           >
             {cat}
           </button>
         ))}
       </div>
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {data?.products?.length > 0 ? (
-          data.products.map((product, i) => (
-            <ProductCard key={i} product={product} />
+          data.products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <p>No products available.</p>
+          <p className="text-center text-gray-500 col-span-full">
+            No products available.
+          </p>
         )}
       </div>
     </div>

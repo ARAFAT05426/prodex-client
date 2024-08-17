@@ -7,14 +7,21 @@ const PartnersContainer = () => {
     "/partners/samsung.png",
     "/partners/sharp.png",
   ];
+  
   return (
-    <div className="border-t">
-      <div className="bg-white container mx-auto flex flex-wrap items-center justify-between min-h-44">
-        {partners?.map((partner, i) => (
-          <img key={i} src={partner} alt={i} />
+    <div className="border-t border-gray-200 py-5">
+      <div className="bg-white container mx-auto flex flex-wrap items-center justify-center gap-6">
+        {partners.map((partner, i) => (
+          <img
+            key={i}
+            src={partner}
+            alt={`Partner ${i + 1}`}
+            className=" w-auto max-w-xs"
+          />
         ))}
       </div>
     </div>
   );
 };
+
 export default PartnersContainer;

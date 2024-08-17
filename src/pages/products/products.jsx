@@ -19,7 +19,7 @@ const Products = () => {
   const [sortByPrice, setSortByPrice] = useState("");
 
   const { data, loading, error, refetch } = useRefetch(
-    `/products?search=${searchTerm}&category=${category}&priceRange=${priceRange}&sortByDate=${sortByDate}&sortByPrice=${sortByPrice}&page=${page}&limit=${8}`
+    `/products?search=${searchTerm}&category=${category}&priceRange=${priceRange}&sortByDate=${sortByDate}&sortByPrice=${sortByPrice}&page=${page}&limit=8`
   );
 
   useEffect(() => {
@@ -49,13 +49,11 @@ const Products = () => {
   };
 
   const getPaginationButtons = () => {
-    if (!data || !data.totalPages) {
-      return null;
-    }
+    if (!data || !data.totalPages) return null;
 
     const pages = [];
     const start = Math.max(1, page - 2);
-    const end = Math.min(data?.totalPages || 1, page + 2);
+    const end = Math.min(data.totalPages, page + 2);
 
     for (let i = start; i <= end; i++) {
       pages.push(
@@ -65,7 +63,7 @@ const Products = () => {
           className={`px-3 py-1 md:px-4 md:py-2 text-xs md:text-sm font-semibold ${
             page === i
               ? "bg-blue-500 text-white"
-              : "text-gray-600 bg-blue-50/50 hover:bg-blue-100 hover:text-blue-600"
+              : "text-gray-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-600"
           }`}
         >
           {i}
@@ -117,7 +115,7 @@ const Products = () => {
   return (
     <>
       <ParalaxHeader title="Products" />
-      <div className="container mx-auto flex flex-wrap items-center justify-center gap-2 my-5">
+      <div className="container mx-auto flex flex-wrap justify-center gap-4 my-5 px-4">
         <TypeSearch
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -148,13 +146,17 @@ const Products = () => {
           placeholder="Sort by Date"
         />
       </div>
-      <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-5">
-        {data?.products?.map((product, i) => (
-          <ProductCard key={i} product={product} />
-        ))}
+      <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
+        {data?.products?.length ? (
+          data.products.map((product, i) => (
+            <ProductCard key={i} product={product} />
+          ))
+        ) : (
+          <p className="text-center col-span-full">No products available.</p>
+        )}
       </div>
 
-      <div className="w-fit mx-auto divide-x flex items-center justify-center border my-5 text-xs md:text-sm">
+      <div className="w-fit mx-auto flex items-center justify-center gap-1 my-5 text-xs md:text-sm">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page === 1}
@@ -164,13 +166,13 @@ const Products = () => {
         >
           <MdOutlineKeyboardArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
         </button>
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center gap-1">
           {getPaginationButtons()}
         </div>
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page === data?.totalPages}
-          className={`px-2 py-1 md:px-5 md:py-2 text-gray-600 bg-blue-50/75 hover:bg-blue-100 hover:text-blue-600 ${
+          className={`px-4 py-1 md:px-5 md:py-2 text-gray-600 bg-blue-50/75 hover:bg-blue-100 hover:text-blue-600 ${
             page === data?.totalPages ? "cursor-not-allowed opacity-50" : ""
           }`}
         >

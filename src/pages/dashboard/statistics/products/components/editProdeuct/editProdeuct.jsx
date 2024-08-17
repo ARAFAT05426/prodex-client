@@ -1,14 +1,16 @@
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import useImageUpload from "../../../../../../hooks/server/useImageUpload";
-import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
 import Modal from "../../../../../../componets/modals/modal/modal";
+import axiosCommon from "../../../../../../hooks/instance/axiosCommon";
+import useImageUpload from "../../../../../../hooks/server/useImageUpload";
 import TypeText from "../../../../../../componets/fields/typeText/typeText";
 import TypeFile from "../../../../../../componets/fields/typeFile/typeFile";
 import TypeSelect from "../../../../../../componets/fields/typeSelect/typeSelect";
-import TypeMultiInput from "../../../../../../componets/fields/typeMultiInput/typeMultiInput";
 import TypeTextArea from "../../../../../../componets/fields/typeTextArea/typeTextArea";
 import PrimaryBtn from "../../../../../../componets/common/buttons/primaryBtn/primaryBtn";
+import TypeMultiInput from "../../../../../../componets/fields/typeMultiInput/typeMultiInput";
+
 const EditProduct = ({ isOpen, onClose, product, refetch }) => {
   const [formData, setFormData] = useState({
     _id: "",
@@ -56,8 +58,10 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
           ...prevFormData,
           image: uploadedImageUrl,
         }));
+        toast.success("Image uploaded successfully");
       } catch (error) {
         console.error("Image upload failed:", error);
+        toast.error("Image upload failed");
       }
     }
   };
@@ -75,10 +79,12 @@ const EditProduct = ({ isOpen, onClose, product, refetch }) => {
     try {
       const response = await axiosCommon.put(`/products/update`, formData);
       console.log("Product updated:", response.data);
+      toast.success("Product updated successfully");
       refetch();
       onClose();
     } catch (error) {
       console.error("Error updating product:", error);
+      toast.error("Error updating product");
     }
   };
 

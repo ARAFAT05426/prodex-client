@@ -22,8 +22,7 @@ const StatCard = ({ icon: Icon, title = "", value = 0, description = "" }) => {
 StatCard.propTypes = {
   icon: PropTypes?.elementType?.isRequired,
   title: PropTypes?.string?.isRequired,
-  value: PropTypes?.oneOfType([PropTypes?.string, PropTypes?.number])
-    ?.isRequired,
+  value: PropTypes?.any,
   description: PropTypes?.string,
 };
 
