@@ -8,18 +8,18 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import { FaSpinner } from "react-icons/fa";
+import Loader from "../../componets/loader/loader";
 
 const Products = () => {
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortByDate, setSortByDate] = useState("");
+  const [sortByDate, setSortByDate] = useState("Newest");
   const [sortByPrice, setSortByPrice] = useState("");
 
   const { data, loading, error, refetch } = useRefetch(
-    `/products?search=${searchTerm}&category=${category}&priceRange=${priceRange}&sortByDate=${sortByDate}&sortByPrice=${sortByPrice}&page=${page}&limit=${10}`
+    `/products?search=${searchTerm}&category=${category}&priceRange=${priceRange}&sortByDate=${sortByDate}&sortByPrice=${sortByPrice}&page=${page}&limit=${8}`
   );
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Products = () => {
     setCategory("");
     setSearchTerm("");
     setPriceRange("");
-    setSortByDate("");
+    setSortByDate("Newest");
     setSortByPrice("");
     setPage(1);
     refetch();
@@ -101,7 +101,7 @@ const Products = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
-        <FaSpinner className="h-5 w-5 animate-spin" />
+        <Loader />
       </div>
     );
   }
@@ -148,7 +148,6 @@ const Products = () => {
           placeholder="Sort by Date"
         />
       </div>
-
       <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-5">
         {data?.products?.map((product, i) => (
           <ProductCard key={i} product={product} />

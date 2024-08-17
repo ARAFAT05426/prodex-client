@@ -4,7 +4,7 @@ import useAuth from "../../../hooks/providers/useAuth";
 const WelcomeCard = () => {
   const { user } = useAuth();
   return (
-    <div className="flex items-center justify-between shadow-sm hover:shadow rounded px-7 py-5 mb-3 border border-blue-300/25 transition-all duration-300">
+    <div className="flex flex-col md:flex-row items-center justify-between shadow-sm hover:shadow rounded px-7 py-5 mb-3 border border-blue-300/25 transition-all duration-300">
       <div>
         <h1 className="bg-gradient-to-tl from-blue-500 via-blue-400 to-blue-600 text-2xl md:text-4xl text-transparent bg-clip-text font-montserrat font-bold mb-4">
           Welcome back! {user?.displayName} ready to

@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
         />
         <div className="glassy-overlay"></div>
       </div>
-      <div className="absolute top-1 -left-5 -rotate-45 px-5 py-1 text-center min-w-20 flex items-center gap-1 text-white bg-blue-500 text-xs font-semibold">
+      <div className="absolute top-3 -left-6 -rotate-45 px-7 py-1 text-center min-w-28 flex items-center gap-1 text-white bg-blue-500 text-xs font-semibold">
         <FaStarHalfStroke /> {ratings}
       </div>
       <div className="flex flex-col flex-1 pl-1 space-y-2">
@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
             {stock}
           </span>
         </div>
-        <div className="flex-1 flex flex-col gap-1 px-1">
+        <div className="flex-1 flex flex-col gap-px px-1">
           {features?.map((feature, i) => (
             <span
               key={i}
@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
           ))}
         </div>
       </div>
-      <div className="mt-auto w-full">
+      <div className="mt-2 w-full">
         <PrimaryBtn className="w-full">$ {price}</PrimaryBtn>
       </div>
     </div>

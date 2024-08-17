@@ -1,4 +1,4 @@
-import { FaDollarSign, FaRegHeart, FaTasks } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import StatCard from "../../../componets/cards/StatCard/StatCard";
 import WelcomeCard from "../../../sections/statistics/welcomeCard/welcomeCard";
 import useRefetch from "../../../hooks/server/useRefetch";
@@ -6,13 +6,20 @@ import useAuth from "../../../hooks/providers/useAuth";
 import { TbCheckupList } from "react-icons/tb";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import ManageProducts from "./products/manageProducts";
+import Loader from "../../../componets/loader/loader";
 
 const Statistics = () => {
   const { user } = useAuth();
-  const { data, loading, refetch } = useRefetch(
-    `/products/?author=${user?.email}`
-  );
-  console.log(data);
+  const { data, loading } = useRefetch(`/stats/${user?.email}`);
+
+  if (loading) {
+    return (
+      <div className="h-96 flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <>
       <WelcomeCard />
@@ -20,7 +27,7 @@ const Statistics = () => {
         <StatCard
           icon={TbCheckupList}
           title="Products"
-          value="85"
+          value={data?.totalProducts}
           description="Products Added"
         />
         <StatCard

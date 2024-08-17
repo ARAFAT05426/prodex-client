@@ -65,7 +65,7 @@ const Login = () => {
       <div className="w-full md:w-1/2 lg:w-2/5 px-4 flex flex-col justify-center">
         <div className="w-full max-w-lg mx-auto font-montserrat">
           <Link to="/" className="text-4xl md:text-5xl lg:text-7xl font-medium">
-            <span className="-ml-2">Hello</span> <br />
+            <span className="-ml-1">Hello</span> <br />
             <span className="font-extrabold">Welcome!</span>
           </Link>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-3">
@@ -77,6 +77,7 @@ const Login = () => {
                 name="email"
                 id="email"
                 placeholder="Enter your email"
+                defaultValue="guest@example.com" // Set default value for email
                 required
               />
             </label>
@@ -88,6 +89,7 @@ const Login = () => {
                 name="password"
                 id="password"
                 placeholder="Enter your password"
+                defaultValue="guestPassword123" // Set default value for password
                 required
               />
               <span

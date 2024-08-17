@@ -1,16 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import useAuth from "../../hooks/providers/useAuth";
-import PrimaryBtn from "../../componets/common/buttons/primaryBtn/primaryBtn";
-import { useDevelopmentNotice } from "../../hooks/providers/useDevelopmentNotice";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import PrimaryBtn from "../../componets/common/buttons/primaryBtn/primaryBtn";
 
 const Signup = () => {
-  const { user, signup, updateUserProfile } = useAuth();
+  const { user, signup, updateUserProfile, logInWithGoogle } = useAuth();
   const navigate = useNavigate();
-  const { showNotice } = useDevelopmentNotice();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   // Redirect to homepage if the user is already logged in
@@ -29,17 +28,28 @@ const Signup = () => {
     const password = formData.get("password");
 
     if (!name || !email || !password) {
-      console.error("All fields are required");
+      toast.error("All fields are required");
       return;
     }
     try {
       await signup(email, password);
-      console.log("beforeUpdate:", user);
       await updateUserProfile({ displayName: name });
+      toast.success("Registration successful! Redirecting...");
       navigate("/dashboard");
       e.target.reset();
     } catch (error) {
-      console.error("An error occurred during registration:", error.message);
+      toast.error("An error occurred during registration: " + error.message);
+    }
+  };
+
+  // Handle Google sign-in
+  const handleGoogleSignIn = async () => {
+    try {
+      await logInWithGoogle();
+      toast.success("Google sign-in successful! Redirecting...");
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error("An error occurred during Google sign-in: " + error.message);
     }
   };
 
@@ -60,7 +70,7 @@ const Signup = () => {
             to={"/"}
             className="text-4xl md:text-5xl lg:text-7xl font-medium"
           >
-            <span className="-ml-2">Welcome</span> <br />
+            <span className="-ml-1">Welcome</span> <br />
             <span className="font-extrabold">Join Us!</span>
           </Link>
           <form
@@ -118,7 +128,7 @@ const Signup = () => {
           </div>
           {/* Social sign-up buttons */}
           <button
-            onClick={showNotice}
+            onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center font-semibold bg-white text-gray-800 border py-2 px-4 rounded shadow-sm"
           >
             <FcGoogle className="text-3xl mr-3" />

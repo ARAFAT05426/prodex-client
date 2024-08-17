@@ -35,13 +35,7 @@ const ManageProducts = () => {
 
   useEffect(() => {
     refetch();
-  }, [
-    searchTerm,
-    category,
-    priceRange,
-    page,
-    refetch,
-  ]);
+  }, [searchTerm, category, priceRange, page, refetch]);
 
   const handleRefetch = async () => {
     setCategory("");

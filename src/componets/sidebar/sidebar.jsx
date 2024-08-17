@@ -2,15 +2,25 @@ import ToggleBar from "../common/buttons/toggleBar/toggleBar";
 import { dashboardLinks } from "../../routes/routelinks";
 import useAuth from "../../hooks/providers/useAuth";
 import { Link, NavLink } from "react-router-dom";
-import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { useState } from "react";
 
 const Sidebar = () => {
-  const { logOut } = useAuth();
+  const { user, logOut } = useAuth();
   const [isAct, setAct] = useState(false);
 
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      toast.success("Logged out successfully!");
+    } catch (error) {
+      toast.error("Failed to log out. Please try again.");
+    }
+  };
+
   return (
-    <div>
+    <>
       <nav className="fixed inset-x-0 top-0 h-16 bg-slate-50/50 backdrop-blur-2xl flex items-center justify-between z-50 px-5 md:px-10 border-b border-b-blue-300/25">
         <div className="block lg:hidden">
           <ToggleBar isActive={isAct} onClick={() => setAct(!isAct)} />
@@ -25,8 +35,12 @@ const Sidebar = () => {
         } lg:translate-x-0 lg:opacity-100 h-screen w-60 transition-all duration-500 z-40`}
       >
         <div className="flex flex-col items-center mt-20">
-          <FaUserCircle className="text-[7.5rem] mb-6" />
-          <div className="w-full flex flex-col gap-1 font-montserrat font-medium">
+          <img
+            className="w-40 h-40 border-2 border-blue-400 rounded-full"
+            src={user?.photoURL}
+            alt=""
+          />
+          <div className="w-full flex flex-col gap-1 mt-5 font-montserrat font-medium">
             {dashboardLinks?.map((dashboardLink, i) => (
               <NavLink
                 key={i}
@@ -48,11 +62,11 @@ const Sidebar = () => {
           </div>
         </div>
         <FaSignOutAlt
-          onClick={logOut}
+          onClick={handleLogout}
           className="text-3xl mx-auto mb-8 cursor-pointer hover:text-blue-600 transition-colors duration-300"
         />
       </aside>
-    </div>
+    </>
   );
 };
 

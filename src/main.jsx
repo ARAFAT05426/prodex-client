@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <DevelopmentNoticeProvider>
         <RouterProvider router={routes} />
         <DevlopmentNotice />
-        <ToastContainer className={`text-xs`} position="top-center" />
+        <ToastContainer className={`text-xs`} position="top-center" autoClose={1000} />
       </DevelopmentNoticeProvider>
     </AuthProvider>
   </React.StrictMode>

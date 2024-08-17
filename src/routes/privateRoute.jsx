@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
+import Loader from "../componets/loader/loader";
 import useAuth from "../hooks/providers/useAuth";
-import { FaSpinner } from "react-icons/fa";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) {
     return (
-      <div className="h-screen flex items-center">
-        <FaSpinner className="h-36 w-36 m-auto animate-spin py-10" />
+      <div className="h-screen flex items-center justify-center">
+
+        <Loader />
       </div>
     );
   }

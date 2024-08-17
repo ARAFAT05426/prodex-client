@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { FaSpinner } from "react-icons/fa";
 import Table from "../../../../../componets/table/table";
+import Loader from "../../../../../componets/loader/loader";
 
 const ProductsTable = ({
   headers,
@@ -13,7 +13,9 @@ const ProductsTable = ({
   return (
     <div className="px-3 md:px-5 mt-5 custom-scrollbar">
       {loading ? (
-        <FaSpinner className="h-10 w-10 m-auto animate-spin py-10" />
+        <div className="h-40 flex items-center justify-center">
+          <Loader />
+        </div>
       ) : (
         <Table
           loading={loading}
